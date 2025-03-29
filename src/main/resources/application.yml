@@ -7,6 +7,9 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-
+  hazelcast:
+    config: classpath:hazelcast.yaml
 server:
-  port: 9090
+  port: 8081
+
+

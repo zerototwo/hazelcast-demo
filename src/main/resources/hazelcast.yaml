@@ -1,0 +1,24 @@
+hazelcast:
+  instance-name: spring-hazelcast-instance
+  cluster-name: dev
+  network:
+    port:
+      port: 5701
+      auto-increment: true
+    join:
+      multicast:
+        enabled: true
+      tcp-ip:
+        enabled: true
+        member-list:
+          - 127.0.0.1
+  management-center:
+    enabled: true
+    console-enabled: true
+  map:
+    testMap:
+      backup-count: 1
+  properties:
+    hazelcast.logging.type: slf4j
+    hazelcast.operation.call.timeout.millis: 120000
+    hazelcast.backpressure.enabled: true

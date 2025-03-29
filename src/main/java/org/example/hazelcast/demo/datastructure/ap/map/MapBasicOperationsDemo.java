@@ -58,10 +58,10 @@ public class MapBasicOperationsDemo {
     System.out.println("=================== Hazelcast Map 基本操作示例 ===================");
     putExample();
     getExample();
-    containsKeyExample();
-    updateExample();
-    removeExample();
-    clearExample();
+//    containsKeyExample();
+//    updateExample();
+//    removeExample();
+//    clearExample();
   }
 
   /**
