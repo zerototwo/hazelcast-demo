@@ -25,11 +25,21 @@ Hazelcast根据您的使用场景提供以下分布式计算工具：
 
 ## 何时使用执行器服务
 
-当您想要在集群成员上运行任意Java代码时，执行器服务是理想选择。
+当您想要在集群成员上运行任意Java代码时，执行器服务是理想选择。执行器服务特别适合：
+
+* 需要在特定成员上执行的复杂计算
+* 需要将任务分发到集群的场景
+* 长时间运行的批处理作业
 
 ## 何时使用管道
 
 当您想要执行涉及多个条目（聚合、连接等）的处理，或涉及需要并行执行的多个计算步骤时，管道是个不错的选择。管道允许您使用条目处理器接收器，根据计算结果更新映射。
+
+管道特别适合：
+* 数据流处理
+* ETL操作
+* 复杂的数据转换
+* 实时分析
 
 ## 分布式计算的实现方式
 
@@ -106,6 +116,75 @@ transformed.writeTo(Sinks.map("result-map"));
 Job job = hazelcastInstance.getJet().newJob(pipeline);
 ```
 
+## 数据摄取与分布式计算
+
+将数据导入到Hazelcast中是分布式计算的重要一环。Hazelcast提供两种主要的数据摄取方式：
+
+### 1. Pipeline数据摄取
+
+Pipeline不仅是处理数据的工具，也是摄取数据的强大方式：
+
+```java
+// 从JDBC数据源读取数据
+Pipeline pipeline = Pipeline.create();
+pipeline.readFrom(Sources.jdbc("SELECT * FROM products", 
+                            dataSource::getConnection))
+      .map(row -> new Product(row.getString("name"), 
+                             row.getDouble("price"), 
+                             row.getString("category")))
+      .writeTo(Sinks.map("product-data"));
+```
+
+Hazelcast内置了多种连接器，包括：
+- Apache Kafka
+- Amazon Kinesis
+- 各种云存储服务(S3, Azure Blob, GCS)
+- 文件系统
+- JDBC数据源
+
+### 2. MapStore数据摄取
+
+与EntryProcessor结合使用的理想选择：
+
+```java
+// 配置MapStore
+MapStoreConfig mapStoreConfig = new MapStoreConfig()
+    .setClassName("org.example.hazelcast.demo.MyMapStore")
+    .setEnabled(true);
+
+Config config = new Config();
+config.getMapConfig("my-map")
+    .setMapStoreConfig(mapStoreConfig);
+```
+
+实现MapStore接口：
+```java
+public class MyMapStore implements MapStore<String, Employee> {
+    @Override
+    public void store(String key, Employee value) {
+        // 写入数据库
+    }
+    
+    @Override
+    public Employee load(String key) {
+        // 从数据库加载
+    }
+    
+    // 其他方法实现...
+}
+```
+
+## 选择合适的工具
+
+| 特性 | 条目处理器 | 执行器服务 | 管道 |
+|-----|----------|----------|------|
+| 适用场景 | 简单的条目更新 | 任意Java代码执行 | 复杂数据流和ETL |
+| 操作原子性 | 是 | 否 | 否 |
+| 执行位置 | 数据所在节点 | 可配置 | 可优化分布 |
+| 结果处理 | 直接返回 | 异步Future | 流式处理 |
+| 扩展性 | 中等 | 高 | 非常高 |
+| 数据摄取集成 | MapStore | 自定义 | 内置连接器 |
+
 ## 性能考虑
 
 - **条目处理器**：适用于简单的更新操作，特别是当您需要更新大量条目但每个更新逻辑相对简单时。
@@ -120,6 +199,24 @@ Job job = hazelcastInstance.getJet().newJob(pipeline);
 4. 避免在条目处理器中处理多个条目或执行耗时操作
 5. 在执行器服务中实现适当的超时和故障处理
 6. 对于复杂的管道作业，利用检查点机制进行故障恢复
+7. 使用User Code Namespaces组织和管理分布式计算代码
+
+## 使用User Code Namespaces
+
+User Code Namespaces是Hazelcast提供的机制，用于管理Java类路径资源并确保不同命名空间间的资源访问隔离性。对于分布式计算尤其重要：
+
+```java
+// 静态配置示例
+Config config = new Config();
+UserCodeNamespaceConfig namespaceConfig = 
+    new UserCodeNamespaceConfig("executor-namespace")
+        .addURL("file:///path/to/your/tasks.jar");
+config.addUserCodeNamespaceConfig(namespaceConfig);
+
+// 关联到ExecutorService
+config.getExecutorConfig("demo-executor")
+    .setUserCodeNamespace("executor-namespace");
+```
 
 ## 注意事项
 
@@ -128,4 +225,9 @@ Job job = hazelcastInstance.getJet().newJob(pipeline);
 - 避免在分布式任务中引用外部数据，应该通过参数传递所需数据
 - 对于长时间运行的操作，最好使用管道而不是条目处理器或执行器服务
 
-通过选择适合您具体使用场景的正确分布式计算工具，您可以显著提高应用程序的性能和可扩展性，同时减少网络开销。 
+通过选择适合您具体使用场景的正确分布式计算工具，您可以显著提高应用程序的性能和可扩展性，同时减少网络开销。
+
+## 参考资料
+
+- [Hazelcast文档 - 用户代码命名空间](https://docs.hazelcast.com/hazelcast/latest/clusters/user-code-namespaces)
+- [Hazelcast文档 - 数据摄取概述](https://docs.hazelcast.com/hazelcast/latest/ingest/overview) 
