@@ -1,6 +1,9 @@
 package org.example.hazelcast.demo;
 
 import com.hazelcast.core.HazelcastInstance;
+import org.example.hazelcast.demo.compute.entryprocessor.EntryProcessorDemoRunner;
+import org.example.hazelcast.demo.compute.executor.ExecutorServiceDemoRunner;
+import org.example.hazelcast.demo.compute.pipeline.PipelineDemoRunner;
 import org.example.hazelcast.demo.datastructure.cp.cpmap.CPMapDemoRunner;
 import org.example.hazelcast.demo.datastructure.cp.fencedlock.FencedLockDemoRunner;
 import org.example.hazelcast.demo.datastructure.cp.iatomiclong.IAtomicLongDemoRunner;
@@ -49,6 +52,9 @@ public class HazelcastDemoRunner {
   private final ICountDownLatchDemoRunner iCountDownLatchDemoRunner;
   private final ISemaphoreDemoRunner iSemaphoreDemoRunner;
   private final EventJournalDemoRunner eventJournalDemoRunner;
+  private final EntryProcessorDemoRunner entryProcessorDemoRunner;
+  private final ExecutorServiceDemoRunner executorServiceDemoRunner;
+  private final PipelineDemoRunner pipelineDemoRunner;
 
   @Autowired
   public HazelcastDemoRunner(TopicDemoRunner topicDemoRunner,
@@ -66,7 +72,10 @@ public class HazelcastDemoRunner {
       IAtomicReferenceDemoRunner iAtomicReferenceDemoRunner,
       ICountDownLatchDemoRunner iCountDownLatchDemoRunner,
       ISemaphoreDemoRunner iSemaphoreDemoRunner,
-      EventJournalDemoRunner eventJournalDemoRunner) {
+      EventJournalDemoRunner eventJournalDemoRunner,
+      EntryProcessorDemoRunner entryProcessorDemoRunner,
+      ExecutorServiceDemoRunner executorServiceDemoRunner,
+      PipelineDemoRunner pipelineDemoRunner) {
     this.topicDemoRunner = topicDemoRunner;
     this.queueDemoRunner = queueDemoRunner;
     this.multiMapDemoRunner = multiMapDemoRunner;
@@ -83,6 +92,9 @@ public class HazelcastDemoRunner {
     this.iCountDownLatchDemoRunner = iCountDownLatchDemoRunner;
     this.iSemaphoreDemoRunner = iSemaphoreDemoRunner;
     this.eventJournalDemoRunner = eventJournalDemoRunner;
+    this.entryProcessorDemoRunner = entryProcessorDemoRunner;
+    this.executorServiceDemoRunner = executorServiceDemoRunner;
+    this.pipelineDemoRunner = pipelineDemoRunner;
   }
 
   /**
@@ -160,6 +172,15 @@ public class HazelcastDemoRunner {
             case 17:
               eventJournalDemoRunner.eventJournalRunner();
               break;
+            case 18:
+              entryProcessorDemoRunner.entryProcessorRunner();
+              break;
+            case 19:
+              executorServiceDemoRunner.executorServiceRunner();
+              break;
+            case 20:
+              pipelineDemoRunner.pipelineRunner();
+              break;
             default:
               System.out.println("无效选择，请重试。");
           }
@@ -192,8 +213,11 @@ public class HazelcastDemoRunner {
     System.out.println("15. ICountDownLatch 操作示例");
     System.out.println("16. ISemaphore 操作示例");
     System.out.println("17. Event Journal 操作示例 (企业版)");
+    System.out.println("18. EntryProcessor 分布式计算示例");
+    System.out.println("19. ExecutorService 分布式计算示例");
+    System.out.println("20. Pipeline 分布式计算示例 (企业版)");
     System.out.println("0. 退出");
-    System.out.print("请输入选择 [0-17]: ");
+    System.out.print("请输入选择 [0-20]: ");
   }
 
   /**
