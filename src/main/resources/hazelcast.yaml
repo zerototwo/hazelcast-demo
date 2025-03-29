@@ -15,9 +15,16 @@ hazelcast:
   management-center:
     enabled: true
     console-enabled: true
-  map:
-    testMap:
-      backup-count: 1
+
+
+#  map:
+#    testMap:
+#      backup-count: 1
+#    product:
+#      map-store:
+#        enabled: true
+#        initial-mode: EAGER
+#        class-name: org.example.hazelcast.demo.model.Product
   properties:
     hazelcast.logging.type: slf4j
     hazelcast.operation.call.timeout.millis: 120000

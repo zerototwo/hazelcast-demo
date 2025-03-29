@@ -56,8 +56,8 @@ public class MapBasicOperationsDemo {
    */
   public void runAllExamples() {
     System.out.println("=================== Hazelcast Map 基本操作示例 ===================");
-    putExample();
-    getExample();
+//    putExample();
+//    getExample();
 //    containsKeyExample();
 //    updateExample();
 //    removeExample();
