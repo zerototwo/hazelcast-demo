@@ -1,0 +1,107 @@
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective settings
+[WARNING] Unrecognised tag: 'distributionManagement' (position: START_TAG seen ...</repositories>\r\n\t\t\t<distributionManagement>... @268:28)  @ /Users/lupeipei/middleware/apache-maven-3.9.6/conf/settings.xml, line 268, column 28
+[WARNING] 
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< org.example:hazelcast-demo >---------------------
+[INFO] Building hazelcast-demo 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.3:run (default-cli) > test-compile @ hazelcast-demo >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hazelcast-demo ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ hazelcast-demo ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ hazelcast-demo ---
+[INFO] skip non existing resourceDirectory /Users/lupeipei/github/hazelcast-demo/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ hazelcast-demo ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.4.3:run (default-cli) < test-compile @ hazelcast-demo <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.3:run (default-cli) @ hazelcast-demo ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.3)
+
+2025-03-29T15:57:48.698+08:00  INFO 25926 --- [           main] o.e.h.demo.HazelcastDemoApplication      : Starting HazelcastDemoApplication using Java 17.0.11 with PID 25926 (/Users/lupeipei/github/hazelcast-demo/target/classes started by lupeipei in /Users/lupeipei/github/hazelcast-demo)
+2025-03-29T15:57:48.699+08:00  INFO 25926 --- [           main] o.e.h.demo.HazelcastDemoApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-03-29T15:57:49.168+08:00  INFO 25926 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9090 (http)
+2025-03-29T15:57:49.175+08:00  INFO 25926 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-29T15:57:49.175+08:00  INFO 25926 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-29T15:57:49.204+08:00  INFO 25926 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-29T15:57:49.205+08:00  INFO 25926 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 485 ms
+2025-03-29T15:57:49.317+08:00  WARN 25926 --- [           main] c.h.i.impl.HazelcastInstanceFactory      : Hazelcast is starting in a Java modular environment (Java 9 and newer) but without proper access to required Java packages. Use additional Java arguments to provide Hazelcast access to Java internal API. The internal API access is used to get the best performance results. Arguments to be used:
+ --add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+2025-03-29T15:57:49.366+08:00  INFO 25926 --- [           main] com.hazelcast.system.logo                : [192.168.2.1]:5702 [dev] [5.3.5] 
+	+       +  o    o     o     o---o o----o o      o---o     o     o----o o--o--o
+	+ +   + +  |    |    / \       /  |      |     /         / \    |         |   
+	+ + + + +  o----o   o   o     o   o----o |    o         o   o   o----o    |   
+	+ +   + +  |    |  /     \   /    |      |     \       /     \       |    |   
+	+       +  o    o o       o o---o o----o o----o o---o o       o o----o    o   
+2025-03-29T15:57:49.366+08:00  INFO 25926 --- [           main] com.hazelcast.system                     : [192.168.2.1]:5702 [dev] [5.3.5] Copyright (c) 2008-2023, Hazelcast, Inc. All Rights Reserved.
+2025-03-29T15:57:49.366+08:00  INFO 25926 --- [           main] com.hazelcast.system                     : [192.168.2.1]:5702 [dev] [5.3.5] Hazelcast Platform 5.3.5 (20231024 - 0a8cc63) starting at [192.168.2.1]:5702
+2025-03-29T15:57:49.366+08:00  INFO 25926 --- [           main] com.hazelcast.system                     : [192.168.2.1]:5702 [dev] [5.3.5] Cluster name: dev
+2025-03-29T15:57:49.366+08:00  INFO 25926 --- [           main] com.hazelcast.system                     : [192.168.2.1]:5702 [dev] [5.3.5] Integrity Checker is disabled. Fail-fast on corrupted executables will not be performed. For more information, see the documentation for Integrity Checker.
+2025-03-29T15:57:49.367+08:00  INFO 25926 --- [           main] com.hazelcast.system                     : [192.168.2.1]:5702 [dev] [5.3.5] The Jet engine is disabled.
+To enable the Jet engine on the members, do one of the following:
+  - Change member config using Java API: config.getJetConfig().setEnabled(true)
+  - Change XML/YAML configuration property: Set hazelcast.jet.enabled to true
+  - Add system property: -Dhz.jet.enabled=true (for Hazelcast embedded, works only when loading config via Config.load)
+  - Add environment variable: HZ_JET_ENABLED=true (recommended when running container image. For Hazelcast embedded, works only when loading config via Config.load)
+2025-03-29T15:57:49.444+08:00  INFO 25926 --- [           main] c.h.internal.tpc.TpcServerBootstrap      : [192.168.2.1]:5702 [dev] [5.3.5] TPC: disabled
+2025-03-29T15:57:49.590+08:00  INFO 25926 --- [           main] com.hazelcast.system.security            : [192.168.2.1]:5702 [dev] [5.3.5] Enable DEBUG/FINE log level for log category com.hazelcast.system.security  or use -Dhazelcast.security.recommendations system property to see 🔒 security recommendations and the status of current config.
+2025-03-29T15:57:49.637+08:00  INFO 25926 --- [           main] com.hazelcast.instance.impl.Node         : [192.168.2.1]:5702 [dev] [5.3.5] Using Multicast discovery
+2025-03-29T15:57:49.639+08:00  WARN 25926 --- [           main] com.hazelcast.cp.CPSubsystem             : [192.168.2.1]:5702 [dev] [5.3.5] CP Subsystem is not enabled. CP data structures will operate in UNSAFE mode! Please note that UNSAFE mode will not provide strong consistency guarantees.
+2025-03-29T15:57:49.770+08:00  INFO 25926 --- [           main] c.h.internal.diagnostics.Diagnostics     : [192.168.2.1]:5702 [dev] [5.3.5] Diagnostics disabled. To enable add -Dhazelcast.diagnostics.enabled=true to the JVM arguments.
+2025-03-29T15:57:49.773+08:00  INFO 25926 --- [           main] com.hazelcast.core.LifecycleService      : [192.168.2.1]:5702 [dev] [5.3.5] [192.168.2.1]:5702 is STARTING
+2025-03-29T15:57:52.324+08:00  INFO 25926 --- [           main] c.h.internal.cluster.ClusterService      : [192.168.2.1]:5702 [dev] [5.3.5] 
+
+Members {size:1, ver:1} [
+	Member [192.168.2.1]:5702 - 16860a43-0ca9-4679-aa29-49497812f46b this
+]
+
+2025-03-29T15:57:52.324+08:00  WARN 25926 --- [           main] com.hazelcast.instance.impl.Node         : [192.168.2.1]:5702 [dev] [5.3.5] Config seed port is 5701 and cluster size is 1. Some of the ports seem occupied!
+2025-03-29T15:57:52.335+08:00  INFO 25926 --- [           main] com.hazelcast.core.LifecycleService      : [192.168.2.1]:5702 [dev] [5.3.5] [192.168.2.1]:5702 is STARTED
+已配置有界队列 bounded-demo-queue 最大容量为: 5
+2025-03-29T15:57:52.512+08:00  INFO 25926 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9090 (http) with context path '/'
+2025-03-29T15:57:52.518+08:00  INFO 25926 --- [           main] o.e.h.demo.HazelcastDemoApplication      : Started HazelcastDemoApplication in 4.02 seconds (process running for 4.173)
+
+===================== 启动调试信息 =====================
+应用程序已启动，这是TestRunner输出的信息
+下面将显示应用程序的主菜单
+=========================================================
+
+
+=================================================================
+                Hazelcast 演示应用
+=================================================================
+
+
+请选择要运行的示例类型：
+1. Map 操作示例
+2. JCache 操作示例
+3. Topic 操作示例
+4. Queue 操作示例
+5. MultiMap 操作示例
+6. ReplicatedMap 操作示例
+7. Set 操作示例
+8. List 操作示例
+0. 退出
+请输入选择 [0-8]: 
