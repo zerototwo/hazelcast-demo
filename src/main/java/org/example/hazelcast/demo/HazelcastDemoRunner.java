@@ -7,6 +7,7 @@ import org.example.hazelcast.demo.cp.iatomiclong.IAtomicLongDemoRunner;
 import org.example.hazelcast.demo.cp.iatomicreference.IAtomicReferenceDemoRunner;
 import org.example.hazelcast.demo.cp.icountdownlatch.ICountDownLatchDemoRunner;
 import org.example.hazelcast.demo.cp.isemaphore.ISemaphoreDemoRunner;
+import org.example.hazelcast.demo.eventjournal.eventjournal.EventJournalDemoRunner;
 import org.example.hazelcast.demo.ap.flakeid.FlakeIdDemoRunner;
 import org.example.hazelcast.demo.ap.list.ListDemoRunner;
 import org.example.hazelcast.demo.ap.map.MapDemoRunner;
@@ -47,6 +48,7 @@ public class HazelcastDemoRunner {
   private final IAtomicReferenceDemoRunner iAtomicReferenceDemoRunner;
   private final ICountDownLatchDemoRunner iCountDownLatchDemoRunner;
   private final ISemaphoreDemoRunner iSemaphoreDemoRunner;
+  private final EventJournalDemoRunner eventJournalDemoRunner;
 
   @Autowired
   public HazelcastDemoRunner(TopicDemoRunner topicDemoRunner,
@@ -63,7 +65,8 @@ public class HazelcastDemoRunner {
       IAtomicLongDemoRunner iAtomicLongDemoRunner,
       IAtomicReferenceDemoRunner iAtomicReferenceDemoRunner,
       ICountDownLatchDemoRunner iCountDownLatchDemoRunner,
-      ISemaphoreDemoRunner iSemaphoreDemoRunner) {
+      ISemaphoreDemoRunner iSemaphoreDemoRunner,
+      EventJournalDemoRunner eventJournalDemoRunner) {
     this.topicDemoRunner = topicDemoRunner;
     this.queueDemoRunner = queueDemoRunner;
     this.multiMapDemoRunner = multiMapDemoRunner;
@@ -79,6 +82,7 @@ public class HazelcastDemoRunner {
     this.iAtomicReferenceDemoRunner = iAtomicReferenceDemoRunner;
     this.iCountDownLatchDemoRunner = iCountDownLatchDemoRunner;
     this.iSemaphoreDemoRunner = iSemaphoreDemoRunner;
+    this.eventJournalDemoRunner = eventJournalDemoRunner;
   }
 
   /**
@@ -153,6 +157,9 @@ public class HazelcastDemoRunner {
             case 16:
               iSemaphoreDemoRunner.isemaphoreRunner();
               break;
+            case 17:
+              eventJournalDemoRunner.eventJournalRunner();
+              break;
             default:
               System.out.println("无效选择，请重试。");
           }
@@ -184,8 +191,9 @@ public class HazelcastDemoRunner {
     System.out.println("14. IAtomicReference 操作示例");
     System.out.println("15. ICountDownLatch 操作示例");
     System.out.println("16. ISemaphore 操作示例");
+    System.out.println("17. Event Journal 操作示例 (企业版)");
     System.out.println("0. 退出");
-    System.out.print("请输入选择 [0-16]: ");
+    System.out.print("请输入选择 [0-17]: ");
   }
 
   /**
