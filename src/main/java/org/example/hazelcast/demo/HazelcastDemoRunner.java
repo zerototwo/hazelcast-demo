@@ -20,6 +20,7 @@ import org.example.hazelcast.demo.datastructure.ap.replicatedmap.ReplicatedMapDe
 import org.example.hazelcast.demo.datastructure.ap.ringbuffer.RingbufferDemoRunner;
 import org.example.hazelcast.demo.datastructure.ap.set.SetDemoRunner;
 import org.example.hazelcast.demo.datastructure.ap.topic.TopicDemoRunner;
+import org.example.hazelcast.demo.serializing.SerializationDemoRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -55,6 +56,7 @@ public class HazelcastDemoRunner {
   private final EntryProcessorDemoRunner entryProcessorDemoRunner;
   private final ExecutorServiceDemoRunner executorServiceDemoRunner;
   private final PipelineDemoRunner pipelineDemoRunner;
+  private final SerializationDemoRunner serializationDemoRunner;
 
   @Autowired
   public HazelcastDemoRunner(TopicDemoRunner topicDemoRunner,
@@ -75,7 +77,8 @@ public class HazelcastDemoRunner {
       EventJournalDemoRunner eventJournalDemoRunner,
       EntryProcessorDemoRunner entryProcessorDemoRunner,
       ExecutorServiceDemoRunner executorServiceDemoRunner,
-      PipelineDemoRunner pipelineDemoRunner) {
+      PipelineDemoRunner pipelineDemoRunner,
+      SerializationDemoRunner serializationDemoRunner) {
     this.topicDemoRunner = topicDemoRunner;
     this.queueDemoRunner = queueDemoRunner;
     this.multiMapDemoRunner = multiMapDemoRunner;
@@ -95,6 +98,7 @@ public class HazelcastDemoRunner {
     this.entryProcessorDemoRunner = entryProcessorDemoRunner;
     this.executorServiceDemoRunner = executorServiceDemoRunner;
     this.pipelineDemoRunner = pipelineDemoRunner;
+    this.serializationDemoRunner = serializationDemoRunner;
   }
 
   /**
@@ -181,6 +185,9 @@ public class HazelcastDemoRunner {
             case 20:
               pipelineDemoRunner.pipelineRunner();
               break;
+            case 21:
+              serializationDemoRunner.serializationRunner();
+              break;
             default:
               System.out.println("无效选择，请重试。");
           }
@@ -216,8 +223,9 @@ public class HazelcastDemoRunner {
     System.out.println("18. EntryProcessor 分布式计算示例");
     System.out.println("19. ExecutorService 分布式计算示例");
     System.out.println("20. Pipeline 分布式计算示例 (企业版)");
+    System.out.println("21. 序列化方法示例");
     System.out.println("0. 退出");
-    System.out.print("请输入选择 [0-20]: ");
+    System.out.print("请输入选择 [0-21]: ");
   }
 
   /**
