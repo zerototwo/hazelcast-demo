@@ -1,7 +1,14 @@
 package org.example.hazelcast.demo.store;
 
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.map.IMap;
 import com.hazelcast.map.MapStore;
 import org.example.hazelcast.demo.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -17,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Repository
-public class ProductMapStore implements MapStore<Long, Product> {
+public class ProductMapStore implements MapStore<Long, Product> , ApplicationRunner {
 
   private static final Logger logger = LoggerFactory.getLogger(ProductMapStore.class);
   private final JdbcTemplate jdbcTemplate;
@@ -166,5 +173,15 @@ public class ProductMapStore implements MapStore<Long, Product> {
         "SELECT id FROM product WHERE category = ?",
         new Object[] { category },
         (rs, rowNum) -> rs.getLong("id"));
+  }
+  @Autowired
+  @Lazy
+  private HazelcastInstance hazelcastInstance;
+
+
+  @Override
+  public void run(ApplicationArguments args) throws Exception {
+    IMap<Object, Object> map = hazelcastInstance.getMap("products");
+    System.out.println(map);
   }
 }
