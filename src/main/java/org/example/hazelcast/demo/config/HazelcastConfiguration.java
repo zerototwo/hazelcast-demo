@@ -36,11 +36,15 @@ public class HazelcastConfiguration {
                         .setImplementation(userMapStore)
                         .setWriteDelaySeconds(0) // 即时写入
                         .setInitialLoadMode(MapStoreConfig.InitialLoadMode.EAGER)); // 启动时加载
+//企业版Hazelcast才支持持久化配置
+//        PersistenceConfig PersistenceConfig = new PersistenceConfig()
+//            .setEnabled(true);
 
         return new Config()
                 .setInstanceName("hazelcast-instance")
                 .addMapConfig(userMapConfig)
-                .addMapConfig(productMapConfig);
+                .addMapConfig(productMapConfig)
+                ;
     }
 
     @Bean
